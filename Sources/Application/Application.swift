@@ -1,11 +1,12 @@
 import Kitura
+import LoggerAPI
 
 public class App {
 
     let router = Router()
 
     public init() throws {
-
+        Log.info("Hello World")
     }
 
     func postInit() throws {

@@ -1,8 +1,13 @@
+import Foundation
+import Kitura
+import LoggerAPI
+import HeliumLogger
 import Application
 
+HeliumLogger.use(.debug)
 do {
     let app = try App()
     try app.run()
 } catch let error {
-    print(error.localizedDescription)
+    Log.error(error.localizedDescription)
 }
