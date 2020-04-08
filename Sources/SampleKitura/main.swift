@@ -1,11 +1,8 @@
-import Kitura
+import Application
 
-let router = Router()
-
-router.get("/") { request, response, next in
-    response.send("Hello, world!")
-    next()
+do {
+    let app = try App()
+    try app.run()
+} catch let error {
+    print(error.localizedDescription)
 }
-
-Kitura.addHTTPServer(onPort: 8080, with: router)
-Kitura.run()
