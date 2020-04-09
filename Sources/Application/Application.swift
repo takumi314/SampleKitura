@@ -1,4 +1,5 @@
 import Kitura
+import KituraOpenAPI
 import LoggerAPI
 
 public class App {
@@ -11,6 +12,10 @@ public class App {
 
     func postInit() throws {
         router.all("/public", middleware: StaticFileServer())
+        KituraOpenAPI.addEndpoints(
+            to: router,
+            with: KituraOpenAPIConfig(apiPath: "/openapi", swaggerUIPath: "/openapi/ui")
+        )
     }
 
     public func run() throws {
