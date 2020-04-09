@@ -1,11 +1,13 @@
+import Foundation
 import Kitura
+import LoggerAPI
+import HeliumLogger
+import Application
 
-let router = Router()
-
-router.get("/") { request, response, next in
-    response.send("Hello, world!")
-    next()
+HeliumLogger.use(.debug)
+do {
+    let app = try App()
+    try app.run()
+} catch let error {
+    Log.error(error.localizedDescription)
 }
-
-Kitura.addHTTPServer(onPort: 8080, with: router)
-Kitura.run()
