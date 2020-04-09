@@ -10,7 +10,7 @@ public class App {
     }
 
     func postInit() throws {
-
+        router.all("/public", middleware: StaticFileServer())
     }
 
     public func run() throws {
