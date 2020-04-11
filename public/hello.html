@@ -1,6 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>KITURA</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    $(function(){
+        $('#run').on('click', function() {
+            var fd = new FormData();
+            fd.append( "file", $("#post_file").prop("files")[0] );
+            $.ajax({
+                url:'http://localhost:8080/public',
+                type: 'POST',
+                processData : false,
+                contentType : false,
+                data : fd
+            }).done(function(data) {
+                console.log(data);
+                $('#result').html(data);
+            });
+        });
+    })
+    </script>
+    </head>
     <body>
         <h1>Hello World!</h1>
+        <br>
+<!--        <div>-->
+<!--            <input type="file" id="post_file">-->
+<!--            <input type="button" id="run" value="click">-->
+<!--        </div>-->
+        <br>
+        <form action="http://localhost:8080/public" method="post" enctype="multipart/form-data">
+            <p>File <input type="file" name="submitfile" /></p>
+            <p>Password <input type="text" name="username" /></p>
+            <p><input type="submit" value="Apply" /></p>
+        </form>
     </body>
 </html>

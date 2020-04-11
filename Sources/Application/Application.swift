@@ -13,8 +13,11 @@ public class App {
     }
 
     func postInit() throws {
+        // ./codable Todo API
         initializeCodableRoutes(app: self)
-        router.all("/public", middleware: StaticFileServer())
+        // ./public 
+        initializePublicRoutes(app: self)
+
         KituraOpenAPI.addEndpoints(
             to: router,
             with: KituraOpenAPIConfig(apiPath: "/openapi", swaggerUIPath: "/openapi/ui")
