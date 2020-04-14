@@ -7,6 +7,7 @@
 
 import Kitura
 import LoggerAPI
+import Foundation
 
 func initializePublicRoutes(app: App) {
     // 1.
@@ -48,4 +49,23 @@ extension App {
         next()
     }
 
+}
+
+private func importPKCS12(_ fileData: Data, _ password: String, _ handler: @escaping (SecIdentity?, OSStatus) -> Void) throws {
+    let options = [kSecImportExportPassphrase as String: password]
+    var rawItems: CFArray?
+    let status = SecPKCS12Import(fileData as CFData, options as CFDictionary, &rawItems)
+
+    guard status == errSecSuccess else {
+        Log.info("failed importing p12 file. [status: \(status)] \np12_importer {file_path} [-p] {password}")
+        return handler(nil, status)
+    }
+    guard let items = rawItems as? Array<Dictionary<String, Any>> else {
+        return handler(nil, status)
+    }
+    let firstItem = items[0]
+    let identity = firstItem[kSecImportItemIdentity as String] as! SecIdentity
+
+    Log.info("identity: \(identity)")
+    handler(identity, status)
 }
