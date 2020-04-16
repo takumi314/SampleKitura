@@ -7,7 +7,8 @@
 
 import Kitura
 import LoggerAPI
-import Foundation
+import Security
+import Foundation.NSError
 
 func initializePublicRoutes(app: App) {
     // 1.
