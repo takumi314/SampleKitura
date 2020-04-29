@@ -36,5 +36,17 @@
             <p>Password <input type="text" name="password" /></p>
             <p><input type="submit" value="Apply" /></p>
         </form>
+        <br>
+        <h2>Web-Navive連携テスト</h2>
+        <div>
+            <form action="demo-wkwebview://app-action" method="get">
+                <input type="hidden" name="action" value="close" />
+                <p><input type="submit" value="閉じる" /></p>
+            </form>
+            <form action="demo-wkwebview://app-action" method="get">
+                <input type="hidden" name="url" value="https://www.google.com" />
+                <p><input type="submit" value="Safari" /></p>
+            </form>
+        </div>
     </body>
 </html>
